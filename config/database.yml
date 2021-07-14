@@ -21,8 +21,14 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+default_env: &default_env
+  host: <%= ENV.fetch('DB_HOST', '127.0.0.1') %>
+  user: <%= ENV.fetch('DB_PASSWORD', 'postgres') %>
+  password: <%= ENV.fetch('DB_PASSWORD', 'postgres') %>
+
 development:
   <<: *default
+  <<: *default_env
   database: rock_paper_scissors_development
 
   # The specified database role being used to connect to postgres.
@@ -57,6 +63,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  <<: *default_env
   database: rock_paper_scissors_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -81,6 +88,7 @@ test:
 #
 production:
   <<: *default
+  <<: *default_env
   database: rock_paper_scissors_production
   username: rock_paper_scissors
   password: <%= ENV['ROCK_PAPER_SCISSORS_DATABASE_PASSWORD'] %>
