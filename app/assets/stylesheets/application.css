@@ -13,3 +13,122 @@
  *= require_tree .
  *= require_self
  */
+
+/* common */
+body {
+  font-family: 'Monserrat',sans-serif;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.text-color--primary {
+  color: #36006C;
+}
+
+/* popup */
+.popup__overlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(255, 255, 255, 0.72);
+}
+
+.popup__container {
+  position: relative;
+  width: 879px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0px 0px 40px #0000001A;
+  z-index: 1;
+}
+
+.popup__header {
+  padding-top: 81px;
+  font-size: 32px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.popup__close-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 26px;
+  color: rgba(0, 0, 0, 0.54);
+  cursor: pointer;
+}
+
+.popup__content {
+  margin-top: 88px;
+}
+
+.popup__items {
+  display: flex;
+  justify-content: space-around;
+}
+
+.popup__item-caption {
+  margin: 52px auto 68px;
+  text-align: center;
+}
+
+/* game */
+.game__main-header {
+  margin: 0 auto 43px;
+  padding-top: 128px;
+  font-size: 50px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.game__description {
+  font-family: 'Roboto',sans-serif;
+  font-size: 21px;
+  line-height: 32px;
+  opacity: 0.54;
+}
+
+.game__sub-header {
+  margin: 35px auto 41px;
+  font-size: 21px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.game__choices {
+  display: flex;
+  justify-content: space-between;
+}
+
+.game__item {
+  width: 240px;
+  height: 273px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.game__item:hover {
+  background-color: #F8F8F8;
+}
+
+.game__item-caption {
+  font-size: 24px;
+  margin: 26px auto 33px;
+}
+
+/* TODO: do better on mobile */
+@media only screen and (min-width: 768px) {
+  .game__container {
+    width: 740px;
+    margin: 0 auto;
+  }
+}
+

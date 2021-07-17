@@ -194,6 +194,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4)
   selenium-webdriver
+  sprockets-rails
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
