@@ -72,6 +72,10 @@ body {
   justify-content: space-around;
 }
 
+.popup__item-image-wrapper {
+  min-height: 161px;
+}
+
 .popup__item-caption {
   margin: 52px auto 68px;
   text-align: center;
@@ -100,7 +104,7 @@ body {
   text-transform: uppercase;
 }
 
-.game__choices {
+.game__options {
   display: flex;
   justify-content: space-between;
 }
