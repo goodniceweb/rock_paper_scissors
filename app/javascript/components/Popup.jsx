@@ -14,12 +14,33 @@ const IMAGE_MAPPING = Object.freeze({
 
 const getImage = (imageName) => IMAGE_MAPPING[imageName?.toLowerCase()] || LoaderImage
 
-const Popup = ({ popupOverlayClasses, handleOverlayClick, closePopup, opponent, userChoise }) => {
+const renderHeader = (loading, opponent, resultMessage) => {
+  const headerText = loading ? `Waiting ${opponent.name}'s Choose` : resultMessage
+  return (
+    <h2 className="popup__header text-color--primary">{headerText}</h2>
+  )
+}
+
+const renderButton = (closePopup) => (
+  <div className="popup__ok-button app-button app-button--primary" onClick={closePopup}>
+    Ok
+  </div>
+)
+
+const Popup = ({
+  popupOverlayClasses,
+  handleOverlayClick,
+  closePopup,
+  opponent,
+  userChoise,
+  loading,
+  resultMessage,
+}) => {
   return (
     <div className={classNames(popupOverlayClasses)} onClick={handleOverlayClick}>
       <div className="popup__container">
         <div className="popup__close-button" onClick={closePopup}>X</div>
-        <h2 className="popup__header text-color--primary">Waiting {opponent.name}'s Choose</h2>
+        {renderHeader(loading, opponent, resultMessage)}
         <div className="popup__content">
           <div className="popup__items">
             <div className="popup__item">
@@ -33,6 +54,7 @@ const Popup = ({ popupOverlayClasses, handleOverlayClick, closePopup, opponent, 
               <p className="popup__item-caption text-color--primary">{opponent.name}</p>
             </div>
           </div>
+          {!loading && renderButton(closePopup)}
         </div>
       </div>
     </div>
@@ -41,6 +63,8 @@ const Popup = ({ popupOverlayClasses, handleOverlayClick, closePopup, opponent, 
 
 Popup.defaultProps = {
   popupOverlayClasses: ['popup__overlay', 'hidden'],
+  loading: true,
+  resultMessage: 'Something went wrong',
 }
 
 Popup.propTypes = {
@@ -52,6 +76,8 @@ Popup.propTypes = {
     name: PropTypes.string.isRequired,
     choise: PropTypes.string,
   }),
+  loading: PropTypes.bool,
+  resultMessage: PropTypes.string,
 }
 
 export default Popup
