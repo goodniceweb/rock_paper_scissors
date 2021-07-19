@@ -29,7 +29,7 @@ default_env: &default_env
 development:
   <<: *default
   <<: *default_env
-  database: rock_paper_scissors_development
+  database: db/rock_paper_scissors_development.sqlite
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -64,7 +64,7 @@ development:
 test:
   <<: *default
   <<: *default_env
-  database: rock_paper_scissors_test
+  database: db/rock_paper_scissors_test.sqlite
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -89,6 +89,6 @@ test:
 production:
   <<: *default
   <<: *default_env
-  database: rock_paper_scissors_production
+  database: db/rock_paper_scissors_production.sqlite
   username: rock_paper_scissors
   password: <%= ENV['ROCK_PAPER_SCISSORS_DATABASE_PASSWORD'] %>
