@@ -51,8 +51,8 @@ describe ThrowDecorator do
       let(:scissors) { ThrowDecorator.new('scissors') }
       subject(:compare) { ThrowDecorator.new('rock').compare(scissors) }
 
-      it "return win" do
-        is_expected.to eq('win')
+      it "return won" do
+        is_expected.to eq('won')
       end
     end
 

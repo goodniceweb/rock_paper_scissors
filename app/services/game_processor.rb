@@ -1,24 +1,37 @@
-class GameProcessor
-  class << self
-    def call(options = {})
-      new(options).call
-    end
-  end
-
-  def initialize(user_choise:, throw_service: ThrowGetter, decorator: ThrowDecorator)
+class GameProcessor < BaseService
+  def initialize(user_choise:, throw_service: ThrowGetter, decorator: ThrowDecorator, validator: ThrowValidator)
+    @user_choise = user_choise
+    @throw_service = throw_service
     @decorator = decorator
-    @user_choise = decorator.new(user_choise)
-    @throw_result = decorator.new(throw_service.call)
+    @validator = validator
   end
 
   def call
-    {
-      result: user_choise.compare(throw_result),
-      choise: throw_result.name
-    }
+    return error_result unless validator.valid?(user_choise)
+
+    user_throw = decorator.new(user_choise)
+    opponent_throw = decorator.new(throw_service.call)
+
+    OpenStruct.new(
+      success: true,
+      json: {
+        result: user_throw.compare(opponent_throw),
+        choise: opponent_throw.name
+      }
+    )
   end
 
   private
 
-  attr_reader :decorator, :user_choise, :throw_result
+  attr_reader :user_choise, :throw_service, :decorator, :validator
+
+  def error_result
+    OpenStruct.new(
+      success: false,
+      message: "Your input is invalid",
+      json: {
+        result: "error"
+      }
+    )
+  end
 end

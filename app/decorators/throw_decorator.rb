@@ -1,6 +1,4 @@
 class ThrowDecorator
-  CONFIG = YAML.load_file(Rails.root.join('config/game_options.yml'))
-
   attr_reader :name, :beats
 
   def initialize(name)
@@ -13,14 +11,15 @@ class ThrowDecorator
   end
 
   def compare(other)
-    return 'win' if beats?(other)
-    return 'lost' if other.beats?(self)
-    'tie'
+    return GameUtils::STATUSES.won if beats?(other)
+    return GameUtils::STATUSES.lost if other.beats?(self)
+
+    GameUtils::STATUSES.tie
   end
 
   private
 
   def find_option(option)
-    CONFIG.find { |config_item| config_item['name'] == option }
+    GameUtils::CONFIG.find { |config_item| config_item['name'] == option }
   end
 end

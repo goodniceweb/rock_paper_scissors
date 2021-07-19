@@ -18,12 +18,13 @@ describe GameProcessor do
 
       before do
         allow(decorator_klass).to receive(:new).and_return(user_decorator_instance, computed_decorator_instance)
+        allow(user_decorator_instance).to receive(:compare).with(computed_decorator_instance).and_return('won')
       end
 
       it "generates lost result" do
         expect(throw_service).to receive(:call)
         expect(user_decorator_instance).to receive(:compare).with(computed_decorator_instance)
-        is_expected.to include(:result, :choise)
+        expect(processor.json).to include(:result, :choise)
       end
     end
   end
