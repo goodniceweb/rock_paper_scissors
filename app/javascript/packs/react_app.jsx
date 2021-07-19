@@ -33,7 +33,6 @@ const MainApp = (props) => {
     setShowOverlay(true)
     GameAPI.fetchResult(userChoise).then((response) => {
       setApiLoading(false)
-      console.log(response)
       setOpponent({
         ...opponent,
         ...response,

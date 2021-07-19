@@ -27,6 +27,16 @@ const renderButton = (closePopup) => (
   </div>
 )
 
+const messageMapping = Object.freeze({
+  won: 'You won!',
+  lost: 'You lost :(',
+  tie: "It's tie",
+})
+
+const generateHeaderResult = (result, fallback) => {
+  return messageMapping[result] || fallback
+}
+
 const Popup = ({
   popupOverlayClasses,
   handleOverlayClick,
@@ -36,6 +46,7 @@ const Popup = ({
   loading,
   resultMessage,
 }) => {
+  resultMessage = opponent.result ? generateHeaderResult(opponent.result, resultMessage) : resultMessage
   return (
     <div className={classNames(popupOverlayClasses)} onClick={handleOverlayClick}>
       <div className="popup__container">
@@ -75,6 +86,7 @@ Popup.propTypes = {
   opponent: PropTypes.shape({
     name: PropTypes.string.isRequired,
     choise: PropTypes.string,
+    result: PropTypes.string,
   }),
   loading: PropTypes.bool,
   resultMessage: PropTypes.string,
